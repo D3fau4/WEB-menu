@@ -1,0 +1,199 @@
+<!-- SwitchBru DNS designed by pwsincd, with edits for gamepad support and news, users and more by Ep8Script -->
+<!DOCTYPE html>
+<html lang="en">
+	
+<!-- Mirrored from dns.switchbru.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 17 Jan 2019 15:54:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+		<title>Web Browser</title> 
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="keywords" content="nintendo switch games homebrew wii gameboy 3ds"> 
+		<meta name="description" content="Web portal for Nintendo Switch's Internet browser. Hosts HTML5 games and other useful bookmarks for use with the Nintendo Switch."> 
+		<script src="js/jquery.min.js"></script>
+		<script src="js/font-awesome.js"></script>
+		<script src="js/gamepad.js"></script>
+		<script src="js/pages.js"></script>
+		<script src="js/user.js"></script>
+		<script>
+			// Redirects to Google
+			function google() {
+				window.location.href = "http://www.google.com/webhp?nomo=1&amp;hl=en";
+			}
+		</script>
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<!-- Start at dark theme for a smoother fade in -->
+	<body class="dark">
+		<!-- Box for notifications when being shown -->
+		<div id="notification-box" style="display: none;">
+			<div id="notification-icon">
+				<div id="notification-icon-wrapper">
+					<img height="60" id="notification-image">
+				</div>
+			</div>
+			<span class="notification-message"></span>
+			<span class="inner-message"></span>
+		</div>
+		<!-- Transparent overlay -->
+		<div id="overlay" style="display: none;">
+			<div id="user-popup">
+				<div class="left">
+					<div id="popup-user">
+						<div id="popup-user-wrap">
+							<div class="best-icon" style="display: none;">
+								<i class="fas fa-star best"></i>
+							</div>
+							<img id="popup-user-image">
+						</div>
+					</div>
+					<div class="popup-username"></div>
+					<div id="show-buttons">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Main Page -->
+		<div class="active-page" id="main-page" style="display: none;">
+			<div id="adtop">
+								<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+				<!-- vgmoose -->
+				<ins class="adsbygoogle"
+					 style="display:inline-block;width:700px;height:90px"
+					 data-ad-client="ca-pub-8148658375496745"
+					 data-ad-slot="4674951928"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+							</div>
+			<div class="nav">
+				<p class="ad"id="nav" down="outer-google" right="user-icon" onclick="populateData(this.id)">
+					<i id="icon" class="fab fa-hubspot"></i>  <span class="title">Web Browser</span>
+				</p>
+				
+				<div class="time">
+					<span id="time"></span>
+				</div>
+				<span class="next" down="outer-google" up="outer-google" left="outer-google" right="outer-google"></span>
+			</div>
+			<div class="container">
+				<div class="menu">
+					<div class="outer" id="outer-google" up="nav" down="outer-url" onclick="touched(this.id)">
+						<div class="inner" id="one" onclick="populateData(this.id)"><i class="fab fa-google"></i>&nbsp;&nbsp;Google
+						</div>
+					</div>
+					<div class="outer" id="outer-url" up="outer-google" down="outer-news" onclick="touched(this.id)">
+						<div class="inner" id="two" onclick="populateData(this.id)"><i class="fas fa-keyboard"></i>&nbsp;&nbsp;Escribe la URL
+						</div>
+					
+					
+					</div>
+					<div class="outer" id="outer-links" up="outer-survey" down="outer-settings" onclick="touched(this.id)">
+						<div class="inner" id="four" onclick="populateData(this.id)"><i class="fas fa-link"></i>&nbsp;&nbsp;Links Interesantes
+						</div>
+					</div>
+					<hr>
+					<div class="outer" id="outer-settings" up="outer-links" onclick="touched(this.id)">
+						<div class="inner" id="settings" onclick="populateData(this.id)"><i class="fas fa-cog"></i>&nbsp;&nbsp;Ajustes
+						</div>
+					</div>
+				</div>
+				<div class="main" id="content">
+					<p><h2>¡Bienvenido!</h2></p>
+					<br>Gracias por usar Web Browser, hecho por D3fau4<span class="welcome-user"></span>.
+					<div>
+						<input class="selected" type="submit" id="cancel-search" value="Continue to Google" tabindex="-1" onclick="google()" tabindex="-1" down="discord-link" left="outer-google" up="user-icon"/>
+					</div>
+					<br>
+					Encuentrame en:<br><br>
+					<a href="https://discord.gg/cUnjkPH" id="discord-link" tabindex="-1" up="cancel-search" left="outer-google" right="irccloud">
+						<i class="fab fa-discord"></i> https://discord.gg/v8Vbjd6
+					</a>
+					<span></span>
+					
+				</div>
+			</div><span class="inputbuttons" style="display:none;"></span>
+		</div>
+		
+		<!-- User Page, Settings, etc. -->
+		<div id="second-page" style="display: none;">
+		</div>
+		
+		<!-- Different tabs are located in the HTML, to allow search indexing. Toggled via JS in dns.js -->
+		<div id="sections" style="display: none;">
+			<div id="tab-one">
+				<div class="google"><img class="google-rs" src="images/Google.png">
+					<br><br>
+					<form method="get" action="https://www.google.com/search">
+						<div style="googlesearch">
+							<input type="text" id="search-google" name="q" size="25" maxlength="255" value="" placeholder="Escribe tu busqueda" tabindex="-1" up="user-icon" left="outer-google" down="google-button" onclick="touched(this.id)" />
+							<input type="submit" id="google-button" tabindex="-1" up="search-google" left="outer-google" value="Buscar en Google" />
+						</div>
+					</form><span class="select-next" selectnext="search-google"></span>
+				</div>
+			</div>
+			<div id="tab-two">
+				<div class="google"><img class="webkit" src="images/webkit.png">
+					<br><br>
+					<form id="form" onsubmit="return false;">
+						<div style="googlesearch">
+							<input type="url" name="q" size="25" maxlength="255" id="url" value="" placeholder="Escribe tu URL" tabindex="-1" up="user-icon" left="outer-url" down="load-page" onclick="touched(this.id)"/>
+							<input type="submit" id="load-page" value="Cargar Pagina" onclick="loadurl(url)" tabindex="-1" up="url" left="outer-url" />
+						</div>
+					</form>
+					<br>
+					
+				<span class="select-next" selectnext="url"></span></div>
+			</div>
+			<div id="tab-three">
+				<div><h2><i class="far fa-question-circle"></i> SwitchBru DNS Server Feedback</h2><br>
+				This is a survey to collect information on the usage of the SwitchBru DNS server (45.55.142.122).<br><br>
+				We have made some design changes recently, and would like to better understand how people use the DNS service.<br><br>
+				For usage information, please visit the <a id="visit-website" href="http://switchbru.com/dns/" tabindex="-1" up="user-icon" left="outer-survey" down="survey">SwitchBru DNS website</a>.<br><br>
+				<form id="form" action="https://docs.google.com/forms/d/e/1FAIpQLSewt6insjUEzg0dWV--n5OlDodk2Zflr3pbd4XWs6hEuZTzNg/viewform">
+					<div style="googlesearch">
+						<input type="submit" id="survey" value="Take our survey" onclick="survey()" tabindex="-1" up="visit-website" left="outer-survey"/>
+					</div>
+				</form><span class="select-next" selectnext="survey"></span>
+				</div>
+			</div>
+			<div id="tab-four">
+				<!-- HTML for custom links -->
+				<h3 class="custom-links">
+					Links Personalizados 
+					<small>
+						<span class="edit-link-button">[<a id="custom-edit">Editar</a>]</span> 
+						<span class="edit-link-buttons" style="display: none;">[<a class="disabled" id="change-link" down="custom-1" left="outer-links" right="delete-links">Cambiar</a> | 
+							<a class="disabled" id="delete-links" down="custom-2" left="change-link" right="save-links">Borrar</a> | 
+							<a id="save-links" down="custom-3">Guardar</a>]
+						</span>
+					</small>
+				</h3>
+				<div class="flex"></div>
+				<br>
+				
+				
+				<h3>Links de interes</h3>
+				<div class="flex">
+
+					<div class="link"><a href="https://twitter.com/" tabindex="-1">Twitter</a></div>
+					<div class="link"><a href="https://mail.google.com/" tabindex="-1">GMail</a></div>
+					<div class="link"><a href="https://facebook.com/" tabindex="-1">Facebook</a></div>
+					<div class="link"><a href="https://youtube.com/" tabindex="-1">YouTube</a></div>
+					<div class="link"><a href="https://github.com/" tabindex="-1">GitHub</a></div>
+					<div class="link"><a href="https://instagram.com/" tabindex="-1">Instagram</a></div>
+					<div class="link"><a href="https://duckduckgo.com/" tabindex="-1">DuckDuckGo</a></div>
+					<div class="link"><a href="http://lanboard.retrogamer.tech/" tabindex="-1">Super Lan Play</a></div>
+					<div class="link"><a href="https://bing.com/" tabindex="-1">Bing</a></div>
+				</div><span class="select-next" selectnext="custom-1"></span>
+			</div>
+			<div id="tab-settings">
+				<br><input type="submit" id="open-settings" value="Abrir Ajustes" onclick="openSettings()" tabindex="-1" up="user-icon" left="outer-settings"/><span class="select-next" selectnext="open-settings"></span>
+			</div>
+		</div>
+		<script src="js/settings.js"></script>
+		<script src="js/dns.js"></script>
+	</body>
+
+<!-- Mirrored from dns.switchbru.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 17 Jan 2019 15:54:43 GMT -->
+</html>
